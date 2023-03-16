@@ -1,43 +1,39 @@
 # python3
 
+def sift_down(i, data, swaps):
+    min_index = i
+    l = 2 * i + 1
+    if l < len(data) and data[l] < data[min_index]:
+        min_index = l
+    r = 2 * i + 2
+    if r < len(data) and data[r] < data[min_index]:
+        min_index = r
+    if i != min_index:
+        swaps.append((i, min_index))
+        data[i], data[min_index] = data[min_index], data[i]
+        sift_down(min_index, data, swaps)
 
 def build_heap(data):
     swaps = []
-    n = len(data)
-    for i in range(n // 2 - 1, -1, -1):
-        swaps = sift_down(data, i, n, swaps)
-    for i in range(n - 1, 0, -1):
-        data[0], data[i] = data[i], data[0]
-        swaps.append((0, i))
-        swaps = sift_down(data, 0, i, swaps)
-    return swaps
-
-
-def sift_down(data, i, n, swaps):
-    while 2 * i + 1 < n:
-        j = 2 * i + 1
-        if j + 1 < n and data[j + 1] > data[j]:
-            j += 1
-        if data[i] >= data[j]:
-            break
-        data[i], data[j] = data[j], data[i]
-        swaps.append((i, j))
-        i = j
+    for i in range(len(data) // 2, -1, -1):
+        sift_down(i, data, swaps)
     return swaps
 
 
 def main():
-    data_input = input("Enter 'I' to input from keyboard, 'F' to input from a file: ")
-    if data_input == 'I':
+    input_method = input("Enter 'I' to input from keyboard, 'F' to input from a file: ").strip().lower()
+
+    # get input data
+    if input_method == 'i':
         n = int(input("Enter the length of the list: "))
-        data = list(map(int, input("Enter the list of integers: ").split()))
-    elif data_input == 'F':
-        filename = input("Enter the filename: ")
-        with open(filename, 'r') as f:
+        data = list(map(int, input("Enter the elements of the list separated by space: ").split()))
+    elif input_method == 'f':
+        file_path = input("Enter the path to the file containing the list: ")
+        with open(file_path, 'r') as f:
             n = int(f.readline().strip())
             data = list(map(int, f.readline().strip().split()))
     else:
-        print("Invalid input.")
+        print("Invalid input method. Please try again.")
         return
     
     
@@ -59,11 +55,7 @@ def main():
 
     # TODO: output how many swaps were made, 
     # this number should be less than 4n (less than 4*len(data))
-    num_swaps = len(swaps)
-    max_swaps = 4 * n
-    print(f"Number of swaps: {num_swaps}")
-    if num_swaps <= max_swaps:
-        print("All swaps:")
+    assert len(swaps) <= 4 * n
 
     # output all swaps
     print(len(swaps))
