@@ -27,7 +27,7 @@ def main():
         n = int(input("Enter the length of the list: "))
         data = list(map(int, input("Enter the elements of the list separated by space: ").split()))
     elif input_method == 'f':
-        file_path = input("Enter the path to the file containing the list: ")
+        file_path = input("Enter the path to the file containing the list: ").strip()
         try:
             with open(file_path, 'r') as f:
                 n = int(f.readline().strip())
