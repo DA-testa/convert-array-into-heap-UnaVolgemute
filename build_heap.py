@@ -23,15 +23,18 @@ def build_heap(data):
 def main():
     input_method = input("Enter 'I' to input from keyboard, 'F' to input from a file: ").strip().lower()
 
-    # get input data
     if input_method == 'i':
         n = int(input("Enter the length of the list: "))
         data = list(map(int, input("Enter the elements of the list separated by space: ").split()))
     elif input_method == 'f':
         file_path = input("Enter the path to the file containing the list: ")
-        with open(file_path, 'r') as f:
-            n = int(f.readline().strip())
-            data = list(map(int, f.readline().strip().split()))
+        try:
+            with open(file_path, 'r') as f:
+                n = int(f.readline().strip())
+                data = list(map(int, f.readline().strip().split()))
+        except FileNotFoundError:
+            print("File not found. Please try again.")
+            return
     else:
         print("Invalid input method. Please try again.")
         return
