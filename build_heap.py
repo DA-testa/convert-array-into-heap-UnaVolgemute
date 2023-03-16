@@ -3,29 +3,34 @@
 
 def build_heap(data):
     swaps = []
-    # TODO: Creat heap and heap sort
-    # try to achieve  O(n) and not O(n2)
-    n = len(data)
-    swaps = []
-    for i in range(n//2, -1, -1):
-        sift_down(i, data, swaps)
+    size = len(data)
 
+    for i in range((size // 2) - 1, -1, -1):
+        sift_down(data, i, size, swaps)
+
+    for i in range(size - 1, 0, -1):
+        data[0], data[i] = data[i], data[0]
+        swaps.append((0, i))
+        sift_down(data, 0, i, swaps)
     return swaps
 
 
-def sift_down(i, data, swaps):
-    n = len(data)
-    min_index = i
-    left_child = 2*i + 1
-    if left_child < n and data[left_child] < data[min_index]:
-        min_index = left_child
-    right_child = 2*i + 2
-    if right_child < n and data[right_child] < data[min_index]:
-        min_index = right_child
-    if i != min_index:
-        swaps.append((i, min_index))
-        data[i], data[min_index] = data[min_index], data[i]
-        sift_down(min_index, data, swaps)
+def sift_down(data, i, size, swaps):
+    max_index = i
+    left_child = (2 * i) + 1
+    right_child = (2 * i) + 2
+
+    if left_child < size and data[left_child] > data[max_index]:
+        max_index = left_child
+
+    if right_child < size and data[right_child] > data[max_index]:
+        max_index = right_child
+
+    if i != max_index:
+        data[i], data[max_index] = data[max_index], data[i]
+        swaps.append((i, max_index))
+        sift_down(data, max_index, size, swaps)
+
 
 def main():
     
