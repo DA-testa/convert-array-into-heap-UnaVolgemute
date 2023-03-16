@@ -1,5 +1,7 @@
 # python3
 
+import os
+
 def sift_down(i, data, swaps):
     min_index = i
     l = 2 * i + 1
@@ -27,19 +29,20 @@ def main():
         n = int(input("Enter the length of the list: "))
         data = list(map(int, input("Enter the elements of the list separated by space: ").split()))
     elif input_method == 'f':
-        while True:
-            file_path = input("Enter the path to the file containing the list: ")
-            try:
-                with open(file_path, 'r') as f:
-                    n = int(f.readline().strip())
-                    data = list(map(int, f.readline().strip().split()))
-                    break
-            except FileNotFoundError:
-                print("File not found. Please try again.")
-                continue
+        file_path = input("Enter the path to the file containing the list: ")
+        if not os.path.exists(file_path):
+            print("File not found. Please try again.")
+            return
+        if os.path.getsize(file_path) == 0:
+            print("File is empty. Please try again.")
+            return
+        with open(file_path, 'r') as f:
+            n = int(f.readline().strip())
+            data = list(map(int, f.readline().strip().split()))
     else:
         print("Invalid input method. Please try again.")
         return
+
     
     
     # TODO : add input and corresponding checks
