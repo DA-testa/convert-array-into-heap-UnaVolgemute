@@ -48,7 +48,10 @@ def main():
     # TODO : add input and corresponding checks
     # add another input for I or F 
     # first two tests are from keyboard, third test is from a file
-   
+   for d in data:
+        if not isinstance(d, int):
+            print("Invalid input data. Please try again.")
+            return
 
     # input from keyboard
    
@@ -63,10 +66,15 @@ def main():
 
     # TODO: output how many swaps were made, 
     # this number should be less than 4n (less than 4*len(data))
-    assert len(swaps) <= 4 * n
+    num_swaps = len(swaps)
+    max_swaps = 4 * n
+    if num_swaps > max_swaps:
+        print("Too many swaps. Please try again.")
+        return
+    print("Number of swaps:", num_swaps)
 
     # output all swaps
-    print(len(swaps))
+    #print(len(swaps))
     for i, j in swaps:
         print(i, j)
 
