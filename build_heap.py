@@ -50,7 +50,7 @@ def main():
 
 
     # checks if lenght of data is the same as the said lenght
-    assert data is not None and len(data) == n
+    assert len(data) == n
 
     # calls function to assess the data 
     # and give back all swaps
