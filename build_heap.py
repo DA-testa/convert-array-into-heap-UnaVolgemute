@@ -1,6 +1,6 @@
 # python3
 
-def sift_down(i, data, swaps):
+def x(i, data, swaps):
     min_index = i
     l = 2 * i + 1
     if l < len(data) and data[l] < data[min_index]:
@@ -11,7 +11,7 @@ def sift_down(i, data, swaps):
     if i != min_index:
         swaps.append((i, min_index))
         data[i], data[min_index] = data[min_index], data[i]
-        sift_down(min_index, data, swaps)
+        x(min_index, data, swaps)
 
 def build_heap(data):
     swaps = []
@@ -43,11 +43,8 @@ def main():
     # TODO : add input and corresponding checks
     # add another input for I or F 
     # first two tests are from keyboard, third test is from a file
-   
 
     # input from keyboard
-   
-
 
     # checks if lenght of data is the same as the said lenght
     assert len(data) == n
