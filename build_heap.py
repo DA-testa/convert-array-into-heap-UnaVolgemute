@@ -39,7 +39,6 @@ def main():
         print("Invalid input")
         return
     
-    
     # TODO : add input and corresponding checks
     # add another input for I or F 
     # first two tests are from keyboard, third test is from a file
